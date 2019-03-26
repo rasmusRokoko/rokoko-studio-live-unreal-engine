@@ -7,6 +7,7 @@
 #include "IMessageContext.h"
 #include "HAL/ThreadSafeBool.h"
 #include "VirtualProductionFrame.h"
+#include "VirtualProductionSourceLink.h"
 
 class ILiveLinkClient;
 struct FLiveLinkPongMessage;
@@ -79,4 +80,5 @@ private:
 	//singleton instance
 	static FVirtualProductionSource *instance;
 
+	VirtualProductionSourceLink link;
 };

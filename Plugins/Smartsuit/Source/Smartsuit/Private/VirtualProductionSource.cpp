@@ -28,7 +28,8 @@ void FVirtualProductionSource::ReceiveClient(ILiveLinkClient* InClient, FGuid In
 
 
 	//MessageEndpoint->Send(new FLiveLinkConnectMessage(), ConnectionAddress);
-
+	link.Start();
+	UE_LOG(LogTemp, Warning, TEXT(" - - - link started!"));
 	// Register for heartbeats
 	bIsValid = true;
 }
@@ -52,6 +53,7 @@ void FVirtualProductionSource::ClearAllSubjects() {
 bool FVirtualProductionSource::RequestSourceShutdown()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Shutting down"));
+	link.Stop();
 	//HandleClearSubject(FLiveLinkClearSubject("Studio"));
 	for (int i = 0; i < subjectNames.Num(); i++) {
 		HandleClearSubject(subjectNames[i]);
