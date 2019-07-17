@@ -190,6 +190,11 @@ struct SuitData {
 	FName GetSubjectName() {
 		return FName(*FString(ANSI_TO_TCHAR(suitname)));
 	}
+
+	FName GetBindSubjectName() {
+		return FName(*(FString(ANSI_TO_TCHAR(suitname)) + FString(ANSI_TO_TCHAR("_bindpose"))));
+	}
+
 };
 
 

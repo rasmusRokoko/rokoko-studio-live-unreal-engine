@@ -67,6 +67,7 @@ void FVirtualProductionSource::HandleSubjectData(FVirtualProductionSubject virtu
 	
 void FVirtualProductionSource::HandleSuitData(SuitData suit) {
 	suitNames.Add(suit.GetSubjectName());
+	suitNames.Add(suit.GetBindSubjectName());
 	FLiveLinkRefSkeleton skeletonRef;
 	TArray<FName> boneNames;
 	boneNames.Add("Base");
@@ -124,6 +125,65 @@ void FVirtualProductionSource::HandleSuitData(SuitData suit) {
 	skeletonRef.SetBoneNames(boneNames);
 	skeletonRef.SetBoneParents(boneParents);
 	Client->PushSubjectSkeleton(SourceGuid, suit.GetSubjectName(), skeletonRef);
+
+	FLiveLinkRefSkeleton skeletonRef2;
+	TArray<FName> boneNames2;
+	boneNames2.Add("Base");
+	boneNames2.Add("Hips");
+	boneNames2.Add("Spine");
+	boneNames2.Add("Spine2");
+	boneNames2.Add("Neck");
+	boneNames2.Add("Head");
+
+	boneNames2.Add("LeftShoulder");
+	boneNames2.Add("LeftArm");
+	boneNames2.Add("LeftForeArm");
+	boneNames2.Add("LeftHand");
+
+	boneNames2.Add("RightShoulder");
+	boneNames2.Add("RightArm");
+	boneNames2.Add("RightForeArm");
+	boneNames2.Add("RightHand");
+
+	boneNames2.Add("LeftUpLeg");
+	boneNames2.Add("LeftLeg");
+	boneNames2.Add("LeftFoot");
+
+	boneNames2.Add("RightUpLeg");
+	boneNames2.Add("RightLeg");
+	boneNames2.Add("RightFoot");
+
+
+	TArray<int32> boneParents2;
+	boneParents2.Add(0); //0 - root
+	boneParents2.Add(0); //1 - hip
+	boneParents2.Add(1); //2 - spine
+	boneParents2.Add(2); //3 - spine2
+	boneParents2.Add(3); //4 - neck
+	boneParents2.Add(4); //5 - head
+
+	boneParents2.Add(3); //6 - LeftShoulder
+	boneParents2.Add(6); //7 - LeftArm
+	boneParents2.Add(7); //8 - LeftForearm
+	boneParents2.Add(8); //9 - LeftHand
+
+	boneParents2.Add(3); //10 - RightShoulder
+	boneParents2.Add(10); //11 - RightArm
+	boneParents2.Add(11); //12 - RightForearm
+	boneParents2.Add(12); //13 - RightHand
+
+	boneParents2.Add(1); //14 - LeftUpLeg
+	boneParents2.Add(14); //15 - LeftLeg
+	boneParents2.Add(15); //16 - LeftFoot
+
+	boneParents2.Add(1); //17 - RightUpLeg
+	boneParents2.Add(17); //18 - RightLeg
+	boneParents2.Add(18); //19 - RightFoot
+
+	skeletonRef2.SetBoneNames(boneNames2);
+	skeletonRef2.SetBoneParents(boneParents2);
+
+	Client->PushSubjectSkeleton(SourceGuid, suit.GetBindSubjectName(), skeletonRef2);
 }
 
 void FVirtualProductionSource::CreateJoint(TArray<FTransform>& transforms, int32 index, Sensor* parent, Sensor* sensor) {
@@ -187,6 +247,13 @@ void FVirtualProductionSource::CreateJoint(TArray<FTransform>& transforms, int32
 	}
 }
 
+void FVirtualProductionSource::CreateBindJoint(TArray<FTransform>& transforms, FVector position, FVector euler) {
+	int32 transformIndex = transforms.AddUninitialized(1);
+	transforms[transformIndex].SetLocation(position);
+	transforms[transformIndex].SetRotation(FQuat::MakeFromEuler(euler));
+	transforms[transformIndex].SetScale3D(FVector(1, 1, 1));
+}
+
 void FVirtualProductionSource::HandleSuits(TArray<SuitData> suits) {
 	//UE_LOG(LogTemp, Warning, TEXT("Handling faces %d"), faces.Num());
 	existingSuits.Empty();
@@ -224,9 +291,9 @@ void FVirtualProductionSource::HandleSuits(TArray<SuitData> suits) {
 
 			for (int i = 0; i < notExistingSubjects.Num(); i++) {
 				//UE_LOG(LogTemp, Warning, TEXT("Removing face"));
-				Client->ClearSubject(notExistingSubjects[i]);
-				suitNames.RemoveSingle(notExistingSubjects[i]);
-				notExistingSubjects.RemoveAt(i);
+				//Client->ClearSubject(notExistingSubjects[i]);
+				//suitNames.RemoveSingle(notExistingSubjects[i]);
+				//notExistingSubjects.RemoveAt(i);
 			}
 		}
 
@@ -267,6 +334,37 @@ void FVirtualProductionSource::HandleSuits(TArray<SuitData> suits) {
 		CreateJoint(transforms, 0, subject.GetSensor(SENSOR_RIGHT_LOWER_LEG), subject.GetSensor(SENSOR_RIGHT_FOOT));
 		
 		Client->PushSubjectData(SourceGuid, subject.GetSubjectName(), FrameData);
+
+		FLiveLinkFrameData FrameDataBindPose;
+		FrameDataBindPose.WorldTime = FLiveLinkWorldTime((double)(timer.GetCurrentTime()));
+		TArray<FTransform>& bindTrasforms = FrameDataBindPose.Transforms;
+		bindTrasforms.Reset(20);
+		CreateBindJoint(bindTrasforms, FVector(0, 0, 0), FVector(90, 0, 0)); // base
+		CreateBindJoint(bindTrasforms, FVector(-0.0000007, -93.9969482, 3.9482567), FVector(0, 0, 0)); // hips
+		CreateBindJoint(bindTrasforms, FVector(0.0000311, -8.4838419, -3.9482708), FVector(-0.0000546, 0, -179.9999847)); // spine 1
+		CreateBindJoint(bindTrasforms, FVector(0.0000331, 12.7487335, -0.0000076), FVector(0, 0, 0)); // spine 2
+		CreateBindJoint(bindTrasforms, FVector(0.0000042, 20.1503448, -0.0000409), FVector(0, 0, 0)); // neck
+		CreateBindJoint(bindTrasforms, FVector(0.0000115, 11.1009369, 0.0000034), FVector(0, 0, 0)); // head
+
+		CreateBindJoint(bindTrasforms, FVector(-6.9999981, 12.3680744, 1.9037932), FVector(-0.000005, -0.000041, 90.0000076)); // left shoulder
+		CreateBindJoint(bindTrasforms, FVector(0.0000031, 13.6077785, 0.0), FVector(0.0000305, 90.0, -0.0000005)); // left up arm
+		CreateBindJoint(bindTrasforms, FVector(0.0000915, 27.1021519, 0.000035), FVector(-0.0000373, 0.0, -0.0000636)); // left lower arm
+		CreateBindJoint(bindTrasforms, FVector(-0.0000247, 28.2999878, 0.0000167), FVector(-0.00002, 0.0, -0.0)); // left hand
+
+		CreateBindJoint(bindTrasforms, FVector(7.0000019, 12.3680725, 1.9037799), FVector(0.0000496, 0.000041, -90.0000992)); // right shoulder
+		CreateBindJoint(bindTrasforms, FVector(-0.000007, 13.6077785, 0.0000115), FVector(0.0001221, -90.0, -0.0000024)); // right up arm
+		CreateBindJoint(bindTrasforms, FVector(-0.0000729, 27.1021519, 0.0000326), FVector(-0.000005, 0.0, 0.0000071)); // right lower arm
+		CreateBindJoint(bindTrasforms, FVector(0.0000098, 28.2999878, 0.0000454), FVector(-0.000005, 0.0, 0.0000066)); // right hand
+
+		CreateBindJoint(bindTrasforms, FVector(8.0999508, 0.0, 0.0), FVector(0.0, 90.0, 0.0)); // left up leg
+		CreateBindJoint(bindTrasforms, FVector(-0.0000033, 43.1999855, 0.0000134), FVector(-0.000148, 0.0000205, 0.0)); // left lower leg
+		CreateBindJoint(bindTrasforms, FVector(0.0000114, 43.2999763, -0.062567), FVector(90.0000916, 90.0, 0.0)); // left foot
+
+		CreateBindJoint(bindTrasforms, FVector(-8.0999508, -0.0, -0.0000002), FVector(0.0, -90.0, 0.0)); // right up leg
+		CreateBindJoint(bindTrasforms, FVector(0.0000021, 43.2000084, 0.0000048), FVector(-0.000005, -0.0000068, 0.0)); // right lower leg
+		CreateBindJoint(bindTrasforms, FVector(0.000005, 43.2999878, 0.0625553), FVector(90.0, -90.0, 0.0)); // right foot
+
+		Client->PushSubjectData(SourceGuid, subject.GetBindSubjectName(), FrameDataBindPose);
 	}
 }
 
