@@ -6,6 +6,7 @@
 #include "Dom/JsonValue.h"
 #include "Dom/JsonObject.h"
 //#include "SmartsuitBlueprintLibrary.h"
+#include "SmartsuitDefinitions.h"
 #include "VirtualProductionFrame.generated.h"
 
 
@@ -19,7 +20,8 @@ public:
 };
 
 USTRUCT(BlueprintType, meta = (ToolTip = "Contains all information about a grip."))
-struct FRadiusReferencePoint {
+struct FRadiusReferencePoint 
+{
 
 	GENERATED_USTRUCT_BODY()
 
@@ -40,7 +42,8 @@ struct FRadiusReferencePoint {
 };
 
 USTRUCT(BlueprintType, meta = (ToolTip = "Contains all information about the pivot."))
-struct FReferencePoint {
+struct FReferencePoint 
+{
 
 	GENERATED_USTRUCT_BODY()
 
@@ -57,7 +60,8 @@ struct FReferencePoint {
 };
 
 USTRUCT(BlueprintType, meta = (ToolTip = "Contains all information about a prop's profile."))
-struct FProfile {
+struct FProfile 
+{
 
 	GENERATED_USTRUCT_BODY()
 
@@ -75,7 +79,7 @@ struct FProfile {
 
 	/** Holds information about the color. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Virtual Production", meta = (ToolTip = "Profile's color."))
-	FColor color;
+	FLinearColor color;
 
 	/** Tracker offset position and rotation. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Virtual Production", meta = (ToolTip = "Tracker Offset."))
@@ -98,12 +102,14 @@ struct FProfile {
 	FProfile(TSharedPtr<FJsonObject> jsonObject);
 };
 
-struct FVirtualProductionSubject {
+struct FVirtualProductionSubject 
+{
 	FVector position;
 	FQuat rotation;
 	FName name;
 
-	FVirtualProductionSubject(FVector in_position, FQuat in_rotation, FName in_name) {
+	FVirtualProductionSubject(FVector in_position, FQuat in_rotation, FName in_name) 
+	{
 		position = in_position;
 		rotation = in_rotation;
 		name = in_name;
@@ -112,7 +118,8 @@ struct FVirtualProductionSubject {
 
 /*! \brief Information about a specific props, including its status, rotation, position.*/
 USTRUCT(BlueprintType, meta = (ToolTip = "Contains all information about a prop."))
-struct FProp {
+struct FProp 
+{
 
 	GENERATED_USTRUCT_BODY()
 
@@ -148,17 +155,20 @@ struct FProp {
 	//*
 	//* @return Sensor position.
 	//*/
-	FVector UPosition() {
+	FVector UPosition() 
+	{
 		return FVector(100.0f*position.Z, 100.0f*position.X, 100.0f*position.Y);
 	}
 
-	FRotator FQuatToRotator() {
+	FRotator FQuatToRotator() 
+	{
 		FQuat result(rotation.Z, rotation.X, rotation.Y, rotation.W);
 		FRotator Rotator = result.Rotator();
 		return Rotator;
 	}
 
-	FVirtualProductionSubject GetSubject() {
+	FVirtualProductionSubject GetSubject() 
+	{
 		FQuat quat = FQuat(rotation.Z, rotation.X, rotation.Y, rotation.W);
 		FVector pos = UPosition();
 		return FVirtualProductionSubject(pos, quat, FName(*(FString("prop:") + FString(isLive ? "L:" : "P:") + FString(name))));
@@ -168,7 +178,8 @@ struct FProp {
 
 /*! \brief Information about a specific tracker, including its status, rotation, position.*/
 USTRUCT(BlueprintType, meta = (ToolTip = "Contains all information about a tracker."))
-struct FTracker {
+struct FTracker 
+{
 
 	GENERATED_USTRUCT_BODY()
 
@@ -216,17 +227,20 @@ struct FTracker {
 	//*
 	//* @return Sensor position.
 	//*/
-	FVector UPosition() {
+	FVector UPosition() 
+	{
 		return FVector(100.0f*position.Z, 100.0f*position.X, 100.0f*position.Y);
 	}
 
-	FRotator FQuatToRotator() {
+	FRotator FQuatToRotator() 
+	{
 		FQuat result(rotation.Z, rotation.X, rotation.Y, rotation.W);
 		FRotator Rotator = result.Rotator();
 		return Rotator;
 	}
 
-	FVirtualProductionSubject GetSubject() {
+	FVirtualProductionSubject GetSubject() 
+	{
 
 		FQuat quat = FQuat(rotation.Z, rotation.X, rotation.Y, rotation.W);
 		FVector pos = UPosition();
@@ -353,14 +367,16 @@ struct FFace
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Virtual Production", meta = (ToolTip = "Faces blendshape"))
 	float tongueOut;
 
-	FName GetSubjectName() {
+	FName GetSubjectName() 
+	{
 		return FName(*provider);
 	}
 };
 
 /*! \brief Information about a specific tracker, including its status, rotation, position.*/
 USTRUCT(BlueprintType, meta = (ToolTip = "The Virtual Producion frame contains all props' and trackers' information."))
-struct FVirtualProductionFrame {
+struct FVirtualProductionFrame 
+{
 
 	GENERATED_USTRUCT_BODY()
 
@@ -378,9 +394,13 @@ struct FVirtualProductionFrame {
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Virtual Production", meta = (ToolTip = "List of faces."))
 	TArray<FFace> faces;
+
+	UPROPERTY()
+	TArray<FSuitData> suits;
 	//FVirtualProductionFrame (){}
 };
 
-struct LiveLinkSuit {
+struct LiveLinkSuit 
+{
 
 };

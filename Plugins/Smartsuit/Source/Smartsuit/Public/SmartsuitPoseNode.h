@@ -14,7 +14,8 @@
 
 /*! \brief Bone reference mapping that is used to map bones between Smartsuit sensors and skeleton.*/
 USTRUCT(BlueprintType)
-struct SMARTSUIT_API FSmartsuitBodyMap {
+struct SMARTSUIT_API FSmartsuitBodyMap 
+{
 	GENERATED_USTRUCT_BODY()
 
 	/**Hip bone reference.*/

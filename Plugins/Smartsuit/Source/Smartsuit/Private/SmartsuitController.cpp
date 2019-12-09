@@ -25,17 +25,20 @@ void ASmartsuitController::BeginPlay()
 {
 	Super::BeginPlay();
 	realLife = true;
-	if (AutoConnect) {
+	if (AutoConnect) 
+	{
 		suitname = "autoconnect";
 	}
 }
 
-ASmartsuitReceiver* ASmartsuitController::GetReceiver() {
+ASmartsuitReceiver* ASmartsuitController::GetReceiver() 
+{
 	ASmartsuitReceiver * listener = nullptr;
 	// Find UObjects by type
 	for (TObjectIterator<ASmartsuitReceiver> It; It; ++It)
 	{
-		if (It->enabled) {
+		if (It->enabled) 
+		{
 			listener = *It;
 			break;
 		}
@@ -49,35 +52,42 @@ void ASmartsuitController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	ASmartsuitReceiver * listener = GetReceiver();
-	if (!listener) {
+	if (!listener) 
+	{
 		return;
 	}
 
-	if (AutoConnect) {
+	if (AutoConnect) 
+	{
 		TArray<FString> suits = listener->GetAvailableSmartsuits();
-		if (suits.Num() > 0) {
+		if (suits.Num() > 0) 
+		{
 			suitname = suits[0];
 			AutoConnect = false;
 		}
 	}
-	if (AutoConnect) {
+	if (AutoConnect) 
+	{
 		return;
 	}
 
-	SuitData *data = listener->GetSmartsuit(suitname);
-	if (!data) {
+	FSuitData *data = listener->GetSmartsuit(suitname);
+	if (!data) 
+	{
 		return;
 	}
-	if (!hubInfoRequested) {
+	if (!hubInfoRequested) 
+	{
 		hubInfoRequested = true;
 		GetHubInfo();
 		return;
 	}
-	hasProfile = data->hasProfile;
-	isBroadcast = data->isBroadcasting;
-	fps = data->fps;
-	if (fps > 0 && profileToggleState != data->profileToggle) {
-		profileToggleState = data->profileToggle;
+	//hasProfile = data->hasProfile;
+	//isBroadcast = data->isBroadcasting;
+	//fps = data->fps;
+	//if (fps > 0 && profileToggleState != data->profileToggle) 
+	{
+		//profileToggleState = data->profileToggle;
 	}
 }
 
@@ -101,23 +111,28 @@ void ASmartsuitController::Tick(float DeltaTime)
 //	}
 //}
 
-void ASmartsuitController::Restart() {
+void ASmartsuitController::Restart() 
+{
 	//SendCommand(SMARTSUIT_COMMAND_RESET_KALMAN_FILTER);
 }
 
-void ASmartsuitController::Calibrate() {
+void ASmartsuitController::Calibrate() 
+{
 	//SendCommand(SMARTSUIT_COMMAND_PERFORM_APOSE);
 }
 
-void ASmartsuitController::Broadcast() {
+void ASmartsuitController::Broadcast() 
+{
 	//SendCommand(SMARTSUIT_COMMAND_USE_BROADCAST_ADDR);
 }
 
-void ASmartsuitController::Unicast() {
+void ASmartsuitController::Unicast() 
+{
 	//SendCommand(SMARTSUIT_COMMAND_USE_SPECIFIC_ADDR);
 }
 
-void ASmartsuitController::SetBodyModel(FBodyModel bodyToSet) {
+void ASmartsuitController::SetBodyModel(FBodyModel bodyToSet) 
+{
 	//unsigned char b[sizeof(Body)];
 	//Body body = bodyToSet.GetBody();
 	//memcpy(b, &body, sizeof(Body));
@@ -133,8 +148,10 @@ void ASmartsuitController::GetHubInfo() {
 	//SendCommand(SMARTSUIT_COMMAND_READ_HUB_INFO);
 }
 
-uint8 ASmartsuitController::GetByte(uint32 value, int i) {
-	switch (i) {
+uint8 ASmartsuitController::GetByte(uint32 value, int i) 
+{
+	switch (i) 
+	{
 	case 0:
 		return 0xff & (value >> 24);
 	case 1:
@@ -148,14 +165,17 @@ uint8 ASmartsuitController::GetByte(uint32 value, int i) {
 	}
 }
 
-//uint32 ASmartsuitController::GetLocalIP() {
+//uint32 ASmartsuitController::GetLocalIP() 
+//{
 //	
 //	ASmartsuitReceiver *receiver = GetReceiver();
-//	if (!receiver) {
+//	if (!receiver) 
+//	{
 //		return 0;
 //	}
-//	SuitData* data = receiver->GetSmartsuit(suitname);
-//	if (!data) {
+//	FSuitData* data = receiver->GetSmartsuit(suitname);
+//	if (!data) 
+//	{
 //		return 0;
 //	}
 //    
@@ -165,7 +185,8 @@ uint8 ASmartsuitController::GetByte(uint32 value, int i) {
 //        UE_LOG(LogTemp, Warning, TEXT("Failed to get local adapter addresses"));
 //
 //    uint32 myIp;
-//	for (int i = 0; i < addresses.Num(); i++) {
+//	for (int i = 0; i < addresses.Num(); i++) 
+//	{
 //		TSharedPtr<FInternetAddr> anIp = addresses[i];
 //		if (anIp->IsValid()) {
 //			anIp->GetIp(myIp);
@@ -178,10 +199,11 @@ uint8 ASmartsuitController::GetByte(uint32 value, int i) {
 //#if PLATFORM_MAC
 //    // On Mac, the GetLocalAdapterAddresses function only returns the single wildcard ip 0.0.0.0,
 //    // so we use the linux function getifaddrs() to obtain the local ip in that case (see GetLocalMacIP)
-//    myIp = GetLocalMacIP();
-//    if (GetByte(myIp, 2) == GetByte(data->url, 2)) {
-//        return myIp;
-//    }
+//	myIp = GetLocalMacIP();
+//	if (GetByte(myIp, 2) == GetByte(data->url, 2)) 
+//	{
+//		return myIp;
+//	}
 //#endif
 //    
 //	return 0;

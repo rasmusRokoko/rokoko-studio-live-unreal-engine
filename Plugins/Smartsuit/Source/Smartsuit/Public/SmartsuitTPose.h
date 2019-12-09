@@ -3,7 +3,8 @@
 #pragma once
 /// @cond doc_hidden
 /**Holds information a Smartsuit character pose.*/
-struct TPose {
+struct TPose 
+{
 	FTransform hip;
 	FTransform stomach;
 	FTransform chest;

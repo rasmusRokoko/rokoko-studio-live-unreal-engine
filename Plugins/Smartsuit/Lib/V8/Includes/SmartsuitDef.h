@@ -150,7 +150,8 @@ struct HubInfo {
 * This struct represents a Smartsuit data frame as received from the Smartsuit.
 * It also includes meta variables used to manage the state of the Smartsuit in Unreal.
 */
-struct SuitDataDef {
+struct SuitDataDef 
+{
 
 	/** The name of the Smartsuit. */
 	char suitname[5];

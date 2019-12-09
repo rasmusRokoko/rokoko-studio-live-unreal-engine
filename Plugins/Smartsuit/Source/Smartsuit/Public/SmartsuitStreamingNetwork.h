@@ -70,12 +70,12 @@ public:
 	void Start(int port);
 
 	/// @private
-	virtual void Exit() override { }
+	virtual void Exit() override {}
 
 	/**
 	* The buffer which holds information about all active Smartsuits. The buffer currently has size for 10 Smartsuits.
 	*/
-	SuitData *suits;
+	FSuitData *suits;
 
 	TSet<FString> wifiSupportedSuits;
 

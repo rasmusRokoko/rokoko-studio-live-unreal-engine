@@ -100,7 +100,8 @@ void SVirtualProductionSourceEditor::Tick(const FGeometry& AllottedGeometry, con
 		FProviderPollResult *result = new FProviderPollResult(FMessageAddress::NewAddress(), FString("Studio"), FString(""));
 		FProviderPollResultPtr *poll = new FProviderPollResultPtr(result);
 		PollData.Empty();
-		if (!FVirtualProductionSource::Get()) {
+		if (!FVirtualProductionSource::Get()) 
+		{
 			PollData.Add(*poll);
 		}
 		

@@ -53,7 +53,7 @@ public:
 	* @param suitName The smartsuit name to get the last data for.
 	* @return Returns the last frame received for the smartsuit with name suitName. If no frame is found, it will return nullptr.
 	*/
-	SuitData* GetSmartsuit(FString suitName);
+	FSuitData* GetSmartsuit(FString suitName);
 
 	/**
 	* Lists the names of all known Smartsuits connected to this computer.
@@ -118,11 +118,13 @@ public:
 	}
 
 	UFUNCTION(BlueprintPure, Category = "VirtualProduction", meta = (ToolTip = "Calls a function in VPStreamingNetwork to retrieve a tracker by name."))
-	static FTracker GetTracker(FString name, bool isLive) {
+	static FTracker GetTracker(FString name, bool isLive) 
+	{
 		FTracker result;
 		for (TObjectIterator<ASmartsuitReceiver> It; It; ++It)
 		{
-			if (It->realLife) {
+			if (It->realLife)
+			{
 				result = *It->GetTrackerByNameFromVP(name, isLive);
 			}
 		}
@@ -130,20 +132,22 @@ public:
 	}
 
 	UFUNCTION(BlueprintPure, Category = "VirtualProduction", meta = (ToolTip = "Converts Quaternions into rotators."))
-	static FRotator FQuatToRotator(FQuat rotation) {
+	static FRotator FQuatToRotator(FQuat rotation) 
+	{
 		FQuat result(rotation.Z, rotation.X, rotation.Y, rotation.W);
 		FRotator Rotator = result.Rotator();
 		return Rotator;
 	}
 
 	UFUNCTION(BlueprintPure, Category = "VirtualProduction", meta = (ToolTip = "Converts position into Unreal position."))
-	static FVector UPosition(FVector position) {
+	static FVector UPosition(FVector position) 
+	{
 		return FVector(100.0f*position.Z, 100.0f*position.X, 100.0f*position.Y);
 	}
 	/// @endcond
 
 private:
-	SmartsuitStreamingNetwork listener;
+	//SmartsuitStreamingNetwork listener;
 	VPStreamingNetwork VPlistener;
 
 protected:
