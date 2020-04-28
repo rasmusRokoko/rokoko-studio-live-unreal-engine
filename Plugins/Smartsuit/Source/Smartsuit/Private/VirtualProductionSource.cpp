@@ -157,7 +157,7 @@ void FVirtualProductionSource::HandleSubjectData(FVirtualProductionSubject virtu
 		else
 		if (testval.StartsWith("Light"))
 		{
-			FLiveLinkStaticDataStruct LightData(FLiveLinkCameraStaticData::StaticStruct());
+			FLiveLinkStaticDataStruct LightData(FLiveLinkLightStaticData::StaticStruct());
 			FLiveLinkLightStaticData& LightStaticData = *LightData.Cast<FLiveLinkLightStaticData>();
 
 			Client->PushSubjectStaticData_AnyThread(Key, ULiveLinkLightRole::StaticClass(), MoveTemp(LightData));
@@ -624,7 +624,7 @@ void FVirtualProductionSource::HandleSubjectFrame(TArray<FVirtualProductionSubje
 			if (testval.StartsWith("light"))
 			{
 				FTimer timer;
-				FLiveLinkFrameDataStruct FrameData1(FLiveLinkCameraFrameData::StaticStruct());
+				FLiveLinkFrameDataStruct FrameData1(FLiveLinkLightFrameData::StaticStruct());
 				FLiveLinkLightFrameData& LightFrameData = *FrameData1.Cast<FLiveLinkLightFrameData>();
 				LightFrameData.WorldTime = FLiveLinkWorldTime((double)(timer.GetCurrentTime()));
 				LightFrameData.Transform = hardCodedTransform;
