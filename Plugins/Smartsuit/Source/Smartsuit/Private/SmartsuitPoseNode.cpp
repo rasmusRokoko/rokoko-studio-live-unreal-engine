@@ -323,11 +323,11 @@ void FSmartsuitPoseNode::EvaluateSkeletalControl_AnyThread(FComponentSpacePoseCo
 	{
 		if (RelativeToStart) 
 		{
-			//if (data->Hip()) 
-			//{
-			//	TPose.startPos = SkelComp->GetComponentLocation();//FVector(OriginalTransform(BoneMap.hip, EBoneControlSpace::BCS_WorldSpace, SkelComp, MeshBases).GetTranslation()) - data->Hip()->UPosition();
-			//}
-			//else 
+			if (data->Hip()) 
+			{
+				TPose.startPos = FVector(OriginalTransform(BoneMap.hip, TestBoneControlSpace, SkelComp, MeshBases).GetTranslation()) - data->Hip()->UPosition();
+			}
+			else 
 			{
 				//TPose.startPos = FVector::ZeroVector;
 			}
@@ -337,8 +337,20 @@ void FSmartsuitPoseNode::EvaluateSkeletalControl_AnyThread(FComponentSpacePoseCo
 		else 
 		{
 			//TPose.startPos = FVector::ZeroVector;
+			if (data->Hip())
+			{
+				TPose.startPos = FVector(OriginalTransform(BoneMap.hip, TestBoneControlSpace, SkelComp, MeshBases).GetTranslation()) - data->Hip()->UPosition();
+				TPose.startPos.X = 0.f;
+				TPose.startPos.Y = 0.f;
+			}
+			else
+			{
+
+			}
 		}
 
+
+		//TPose.startPos = SkelComp->GetComponentLocation();
 
 		//TPose.startPos = FVector(OriginalTransform(BoneMap.hip, EBoneControlSpace::BCS_WorldSpace, SkelComp, MeshBases).GetTranslation());
 
@@ -432,14 +444,14 @@ void FSmartsuitPoseNode::EvaluateSkeletalControl_AnyThread(FComponentSpacePoseCo
 	//UE_LOG(LogTemp, Warning, TEXT("size 1: %s    size 2: %s"), *teststring1, *teststring2);
 	//UE_LOG(LogTemp, Warning, TEXT("scale: %s"), *teststring3);
 
-	if (RelativeToStart) 
+	//if (RelativeToStart) 
 	{
 		ApplySmartsuitTransform(BoneMap.hip, hipQuat*hipExpected, (hipPosition*scale) + TPose.startPos, FVector(1, 1, 1), TestBoneControlSpace, SkelComp, MeshBases);
 	}
-	else 
-	{
-		ApplySmartsuitTransform(BoneMap.hip, hipQuat*hipExpected, hipPosition * scale, FVector(1, 1, 1), TestBoneControlSpace, SkelComp, MeshBases);
-	}
+	//else 
+	//{
+	//	ApplySmartsuitTransform(BoneMap.hip, hipQuat*hipExpected, hipPosition * scale, FVector(1, 1, 1), TestBoneControlSpace, SkelComp, MeshBases);
+	//}
 	ApplySmartsuitRotation(BoneMap.stomach, stomachQuat * stomachExpected, hipQuat, TestBoneControlSpace, SkelComp, MeshBases);
 	ApplySmartsuitRotation(BoneMap.chest, chestQuat * chestExpected, hipQuat, TestBoneControlSpace, SkelComp, MeshBases);
 	ApplySmartsuitRotation(BoneMap.neck, neckQuat * neckExpected, hipQuat, TestBoneControlSpace, SkelComp, MeshBases);
