@@ -34,8 +34,8 @@ struct SMARTSUIT_API FSmartsuitBodyMap {
 	UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The head bone to control."))
 		FBoneReference head;
 	/**Head top bone reference.*/
-	UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The head bone to control."))
-		FBoneReference headTop;
+	//UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The head bone to control."))
+	//	FBoneReference headTop;
 	/**Left shoulder bone reference.*/
 	UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The left shoulder bone to control."))
 		FBoneReference leftShoulder;
@@ -49,8 +49,8 @@ struct SMARTSUIT_API FSmartsuitBodyMap {
 	UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The left hand bone to control."))
 		FBoneReference leftHand;
 	/**Left finger tip bone reference.*/
-	UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The left hand bone to control."))
-		FBoneReference leftFingerTip;
+	//UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The left hand bone to control."))
+	//	FBoneReference leftFingerTip;
 	/**Right shoulder bone reference.*/
 	UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The right shoulder bone to control."))
 		FBoneReference rightShoulder;
@@ -64,8 +64,8 @@ struct SMARTSUIT_API FSmartsuitBodyMap {
 	UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The right hand bone to control."))
 		FBoneReference rightHand;
 	/**Right finger tip bone reference.*/
-	UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The left hand bone to control."))
-		FBoneReference rightFingerTip;
+	//UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The left hand bone to control."))
+	//	FBoneReference rightFingerTip;
 	/**Left upper leg bone reference.*/
 	UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The left upper leg bone to control."))
 		FBoneReference leftUpleg;
@@ -76,8 +76,8 @@ struct SMARTSUIT_API FSmartsuitBodyMap {
 	UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The left foot bone to control."))
 		FBoneReference leftFoot;
 	/**Left toe bone reference.*/
-	UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The left toe bone to control."))
-		FBoneReference leftToe;
+	//UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The left toe bone to control."))
+	//	FBoneReference leftToe;
 	/**Right upper leg bone reference.*/
 	UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The right upper leg bone to control."))
 		FBoneReference rightUpleg;
@@ -88,8 +88,8 @@ struct SMARTSUIT_API FSmartsuitBodyMap {
 	UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The right foot bone to control."))
 		FBoneReference rightFoot;
 	/**Right toe bone reference.*/
-	UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The right toe bone to control."))
-		FBoneReference rightToe;
+	//UPROPERTY(EditAnywhere, Category = SkeletalControl, meta = (ToolTip = "The right toe bone to control."))
+	//	FBoneReference rightToe;
 };
 
 UCLASS(BlueprintType)
@@ -115,8 +115,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = SkeletalControl)
 	FName head;
 
-	UPROPERTY(EditAnywhere, Category = SkeletalControl)
-	FName headTop;
+	//UPROPERTY(EditAnywhere, Category = SkeletalControl)
+	//FName headTop;
 
 	UPROPERTY(EditAnywhere, Category = SkeletalControl)
 	FName leftShoulder;
@@ -130,8 +130,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = SkeletalControl)
 	FName leftHand;
 
-	UPROPERTY(EditAnywhere, Category = SkeletalControl)
-	FName leftFingerTip;
+	//UPROPERTY(EditAnywhere, Category = SkeletalControl)
+	//FName leftFingerTip;
 
 	UPROPERTY(EditAnywhere, Category = SkeletalControl)
 	FName rightShoulder;
@@ -145,8 +145,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = SkeletalControl)
 	FName rightHand;
 
-	UPROPERTY(EditAnywhere, Category = SkeletalControl)
-	FName rightFingerTip;
+	//UPROPERTY(EditAnywhere, Category = SkeletalControl)
+	//FName rightFingerTip;
 
 	UPROPERTY(EditAnywhere, Category = SkeletalControl)
 	FName leftUpleg;
@@ -157,8 +157,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = SkeletalControl)
 	FName leftFoot;
 
-	UPROPERTY(EditAnywhere, Category = SkeletalControl)
-	FName leftToe;
+	//UPROPERTY(EditAnywhere, Category = SkeletalControl)
+	//FName leftToe;
 
 	UPROPERTY(EditAnywhere, Category = SkeletalControl)
 	FName rightUpleg;
@@ -169,8 +169,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = SkeletalControl)
 	FName rightFoot;
 
-	UPROPERTY(EditAnywhere, Category = SkeletalControl)
-	FName rightToe;
+	//UPROPERTY(EditAnywhere, Category = SkeletalControl)
+	//FName rightToe;
 };
 
 
@@ -200,8 +200,8 @@ struct SMARTSUIT_API FSmartsuitPoseNode : public FAnimNode_SkeletalControlBase
 		bool RelativeToStart;
 
 	/** Indicates if the character should scale to match the Smartsuit dimensions. This makes the character motion to be 1-1 with the player, but it may cause skinning issues with the character. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SmartsuitAnimationSetup, meta = (NeverAsPin, ToolTip = "Scale bones to match the BodyModel dimensions. This will make the animation look more natural on the character but may cause unusual effects on the mesh."))
-		bool ScaleBones;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SmartsuitAnimationSetup, meta = (NeverAsPin, ToolTip = "Scale bones to match the BodyModel dimensions. This will make the animation look more natural on the character but may cause unusual effects on the mesh."))
+	//	bool ScaleBones;
 
 	/// @private
 	SmartsuitTPose TPose;

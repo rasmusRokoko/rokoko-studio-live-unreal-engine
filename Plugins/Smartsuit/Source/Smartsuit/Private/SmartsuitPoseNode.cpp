@@ -19,7 +19,7 @@ FSmartsuitPoseNode::FSmartsuitPoseNode()
 
 	Controller = nullptr;
 	RelativeToStart = false;
-	ScaleBones = false;
+	//ScaleBones = false;
 
 	//if (BoneMapOverride->IsValidLowLevel())
 	//{
@@ -472,36 +472,36 @@ void FSmartsuitPoseNode::EvaluateSkeletalControl_AnyThread(FComponentSpacePoseCo
 	ApplySmartsuitRotation(BoneMap.rightFoot, rightFootQuat * rightFootExpected, hipQuat, TestBoneControlSpace, SkelComp, MeshBases);
 
 
-	if (ScaleBones) 
-	{
-		Body body = Controller->bodyModel.GetBody();
+	//if (ScaleBones) 
+	//{
+	//	Body body = Controller->bodyModel.GetBody();
 
-		TArray<FTransform> relativePositions = GetAllBoneTransforms(BoneMap.hip, BCS_ParentBoneSpace, SkelComp, MeshBases);
-		//base body
-		float hipScale = ScaleBonesToDistance(BoneMap.hip, BoneMap.hip, BoneMap.stomach, body._hip * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		float stomachScale = ScaleBonesToDistance(BoneMap.stomach, BoneMap.stomach, BoneMap.chest, body._low_back * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		float chestScale = ScaleBonesToDistance(BoneMap.chest, BoneMap.chest, BoneMap.neck, body._middle_back * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		float neckScale =  ScaleBonesToDistance(BoneMap.neck, BoneMap.neck, BoneMap.head, body._neck * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		float headScale = ScaleBonesToDistance(BoneMap.head, BoneMap.head, BoneMap.headTop, body._head * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		//arms
-		float leftShoulderScale = ScaleBonesToDistance(BoneMap.leftShoulder, BoneMap.leftShoulder, BoneMap.leftArm, body._shoulder_blade * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		float leftArmScale = ScaleBonesToDistance(BoneMap.leftArm, BoneMap.leftArm, BoneMap.leftForearm, body._upper_arm * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		float leftForearmScale = ScaleBonesToDistance(BoneMap.leftForearm, BoneMap.leftForearm, BoneMap.leftHand, body._forearm * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		float leftHandScale = ScaleBonesToDistance(BoneMap.leftHand, BoneMap.leftHand, BoneMap.leftFingerTip, body._hand * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		float rightShoulderScale = ScaleBonesToDistance(BoneMap.rightShoulder, BoneMap.rightShoulder, BoneMap.rightArm, body._shoulder_blade * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		float rightArmScale = ScaleBonesToDistance(BoneMap.rightArm, BoneMap.rightArm, BoneMap.rightForearm, body._upper_arm * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		float rightForearmScale = ScaleBonesToDistance(BoneMap.rightForearm, BoneMap.rightForearm, BoneMap.rightHand, body._forearm * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		float rightHandScale = ScaleBonesToDistance(BoneMap.rightHand, BoneMap.rightHand, BoneMap.rightFingerTip, body._hand * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		//legs
-		float leftUpLegScale = ScaleBonesToDistance(BoneMap.leftUpleg, BoneMap.leftUpleg, BoneMap.leftLeg, body._thigh * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		float leftLegScale = ScaleBonesToDistance(BoneMap.leftLeg, BoneMap.leftLeg, BoneMap.leftFoot, body._leg * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		float leftFootScale = ScaleBonesToDistance(BoneMap.leftFoot, BoneMap.leftFoot, BoneMap.leftToe, (body._foot_length - body._foot_heel_offset) * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		float rightUpLegScale = ScaleBonesToDistance(BoneMap.rightUpleg, BoneMap.rightUpleg, BoneMap.rightLeg, body._thigh * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		float rightLegScale = ScaleBonesToDistance(BoneMap.rightLeg, BoneMap.rightLeg, BoneMap.rightFoot, body._leg * 100, TestBoneControlSpace, SkelComp, MeshBases);
-		float rightFootScale = ScaleBonesToDistance(BoneMap.rightFoot, BoneMap.rightFoot, BoneMap.rightToe, (body._foot_length - body._foot_heel_offset) * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	TArray<FTransform> relativePositions = GetAllBoneTransforms(BoneMap.hip, BCS_ParentBoneSpace, SkelComp, MeshBases);
+	//	//base body
+	//	float hipScale = ScaleBonesToDistance(BoneMap.hip, BoneMap.hip, BoneMap.stomach, body._hip * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	float stomachScale = ScaleBonesToDistance(BoneMap.stomach, BoneMap.stomach, BoneMap.chest, body._low_back * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	float chestScale = ScaleBonesToDistance(BoneMap.chest, BoneMap.chest, BoneMap.neck, body._middle_back * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	float neckScale =  ScaleBonesToDistance(BoneMap.neck, BoneMap.neck, BoneMap.head, body._neck * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	float headScale = ScaleBonesToDistance(BoneMap.head, BoneMap.head, BoneMap.headTop, body._head * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	//arms
+	//	float leftShoulderScale = ScaleBonesToDistance(BoneMap.leftShoulder, BoneMap.leftShoulder, BoneMap.leftArm, body._shoulder_blade * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	float leftArmScale = ScaleBonesToDistance(BoneMap.leftArm, BoneMap.leftArm, BoneMap.leftForearm, body._upper_arm * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	float leftForearmScale = ScaleBonesToDistance(BoneMap.leftForearm, BoneMap.leftForearm, BoneMap.leftHand, body._forearm * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	float leftHandScale = ScaleBonesToDistance(BoneMap.leftHand, BoneMap.leftHand, BoneMap.leftFingerTip, body._hand * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	float rightShoulderScale = ScaleBonesToDistance(BoneMap.rightShoulder, BoneMap.rightShoulder, BoneMap.rightArm, body._shoulder_blade * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	float rightArmScale = ScaleBonesToDistance(BoneMap.rightArm, BoneMap.rightArm, BoneMap.rightForearm, body._upper_arm * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	float rightForearmScale = ScaleBonesToDistance(BoneMap.rightForearm, BoneMap.rightForearm, BoneMap.rightHand, body._forearm * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	float rightHandScale = ScaleBonesToDistance(BoneMap.rightHand, BoneMap.rightHand, BoneMap.rightFingerTip, body._hand * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	//legs
+	//	float leftUpLegScale = ScaleBonesToDistance(BoneMap.leftUpleg, BoneMap.leftUpleg, BoneMap.leftLeg, body._thigh * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	float leftLegScale = ScaleBonesToDistance(BoneMap.leftLeg, BoneMap.leftLeg, BoneMap.leftFoot, body._leg * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	float leftFootScale = ScaleBonesToDistance(BoneMap.leftFoot, BoneMap.leftFoot, BoneMap.leftToe, (body._foot_length - body._foot_heel_offset) * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	float rightUpLegScale = ScaleBonesToDistance(BoneMap.rightUpleg, BoneMap.rightUpleg, BoneMap.rightLeg, body._thigh * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	float rightLegScale = ScaleBonesToDistance(BoneMap.rightLeg, BoneMap.rightLeg, BoneMap.rightFoot, body._leg * 100, TestBoneControlSpace, SkelComp, MeshBases);
+	//	float rightFootScale = ScaleBonesToDistance(BoneMap.rightFoot, BoneMap.rightFoot, BoneMap.rightToe, (body._foot_length - body._foot_heel_offset) * 100, TestBoneControlSpace, SkelComp, MeshBases);
 
-		ApplyAllBonePositions(BoneMap.hip, body._hip_width * 100, relativePositions, BCS_ParentBoneSpace, SkelComp, MeshBases);
-	}
+	//	ApplyAllBonePositions(BoneMap.hip, body._hip_width * 100, relativePositions, BCS_ParentBoneSpace, SkelComp, MeshBases);
+	//}
 }
 
 bool FSmartsuitPoseNode::IsValidToEvaluate(const USkeleton* Skeleton, const FBoneContainer& RequiredBones)
@@ -509,26 +509,26 @@ bool FSmartsuitPoseNode::IsValidToEvaluate(const USkeleton* Skeleton, const FBon
 	// if both bones are valid
 #if BUILT_MINOR_VERSION >= 17
 	return (BoneMap.hip.IsValidToEvaluate(RequiredBones) && BoneMap.chest.IsValidToEvaluate(RequiredBones) && BoneMap.stomach.IsValidToEvaluate(RequiredBones) &&
-		BoneMap.neck.IsValidToEvaluate(RequiredBones) && BoneMap.head.IsValidToEvaluate(RequiredBones) && BoneMap.headTop.IsValidToEvaluate(RequiredBones) &&
+		BoneMap.neck.IsValidToEvaluate(RequiredBones) && BoneMap.head.IsValidToEvaluate(RequiredBones) && /*BoneMap.headTop.IsValidToEvaluate(RequiredBones) &&*/
 		BoneMap.leftShoulder.IsValidToEvaluate(RequiredBones) && BoneMap.leftArm.IsValidToEvaluate(RequiredBones) &&
-		BoneMap.leftForearm.IsValidToEvaluate(RequiredBones) && BoneMap.leftHand.IsValidToEvaluate(RequiredBones) && BoneMap.leftFingerTip.IsValidToEvaluate(RequiredBones) &&
+		BoneMap.leftForearm.IsValidToEvaluate(RequiredBones) && BoneMap.leftHand.IsValidToEvaluate(RequiredBones) && /*BoneMap.leftFingerTip.IsValidToEvaluate(RequiredBones) &&*/
 		BoneMap.rightShoulder.IsValidToEvaluate(RequiredBones) && BoneMap.rightArm.IsValidToEvaluate(RequiredBones) &&
-		BoneMap.rightForearm.IsValidToEvaluate(RequiredBones) && BoneMap.rightHand.IsValidToEvaluate(RequiredBones) && BoneMap.rightFingerTip.IsValidToEvaluate(RequiredBones) &&
+		BoneMap.rightForearm.IsValidToEvaluate(RequiredBones) && BoneMap.rightHand.IsValidToEvaluate(RequiredBones) && /*BoneMap.rightFingerTip.IsValidToEvaluate(RequiredBones) &&*/
 		BoneMap.leftUpleg.IsValidToEvaluate(RequiredBones) && BoneMap.leftLeg.IsValidToEvaluate(RequiredBones) &&
 		BoneMap.leftFoot.IsValidToEvaluate(RequiredBones) && BoneMap.rightUpleg.IsValidToEvaluate(RequiredBones) &&
-		BoneMap.rightLeg.IsValidToEvaluate(RequiredBones) && BoneMap.rightFoot.IsValidToEvaluate(RequiredBones) &&
-		BoneMap.leftToe.IsValidToEvaluate(RequiredBones) && BoneMap.rightToe.IsValidToEvaluate(RequiredBones));
+		BoneMap.rightLeg.IsValidToEvaluate(RequiredBones) && BoneMap.rightFoot.IsValidToEvaluate(RequiredBones) /*&&
+		BoneMap.leftToe.IsValidToEvaluate(RequiredBones) && BoneMap.rightToe.IsValidToEvaluate(RequiredBones)*/);
 #else
 	return (BoneMap.hip.IsValid(RequiredBones) && BoneMap.chest.IsValid(RequiredBones) && BoneMap.stomach.IsValid(RequiredBones) &&
-		BoneMap.neck.IsValid(RequiredBones) && BoneMap.head.IsValid(RequiredBones) && BoneMap.headTop.IsValid(RequiredBones) &&
+		BoneMap.neck.IsValid(RequiredBones) && BoneMap.head.IsValid(RequiredBones) && /*BoneMap.headTop.IsValid(RequiredBones) &&*/
 		BoneMap.leftShoulder.IsValid(RequiredBones) && BoneMap.leftArm.IsValid(RequiredBones) &&
-		BoneMap.leftForearm.IsValid(RequiredBones) && BoneMap.leftHand.IsValid(RequiredBones) && BoneMap.leftFingerTip.IsValid(RequiredBones) &&
+		BoneMap.leftForearm.IsValid(RequiredBones) && BoneMap.leftHand.IsValid(RequiredBones) && /*BoneMap.leftFingerTip.IsValid(RequiredBones) &&*/
 		BoneMap.rightShoulder.IsValid(RequiredBones) && BoneMap.rightArm.IsValid(RequiredBones) && 
-		BoneMap.rightForearm.IsValid(RequiredBones) && BoneMap.rightHand.IsValid(RequiredBones) && BoneMap.rightFingerTip.IsValid(RequiredBones) &&
+		BoneMap.rightForearm.IsValid(RequiredBones) && BoneMap.rightHand.IsValid(RequiredBones) && /*BoneMap.rightFingerTip.IsValid(RequiredBones) &&*/
 		BoneMap.leftUpleg.IsValid(RequiredBones) && BoneMap.leftLeg.IsValid(RequiredBones) &&
 		BoneMap.leftFoot.IsValid(RequiredBones) && BoneMap.rightUpleg.IsValid(RequiredBones) &&
-		BoneMap.rightLeg.IsValid(RequiredBones) && BoneMap.rightFoot.IsValid(RequiredBones) &&
-		BoneMap.leftToe.IsValid(RequiredBones) && BoneMap.rightToe.IsValid(RequiredBones));
+		BoneMap.rightLeg.IsValid(RequiredBones) && BoneMap.rightFoot.IsValid(RequiredBones) /*&&
+		BoneMap.leftToe.IsValid(RequiredBones) && BoneMap.rightToe.IsValid(RequiredBones)*/);
 #endif
 }
 
@@ -541,25 +541,25 @@ void FSmartsuitPoseNode::InitializeBoneReferences(const FBoneContainer& Required
 		BoneMap.chest = BoneMapOverride->chest;
 		BoneMap.neck = BoneMapOverride->neck;
 		BoneMap.head = BoneMapOverride->head;
-		BoneMap.headTop = BoneMapOverride->headTop;
+		//BoneMap.headTop = BoneMapOverride->headTop;
 		BoneMap.leftShoulder = BoneMapOverride->leftShoulder;
 		BoneMap.leftArm = BoneMapOverride->leftArm;
 		BoneMap.leftForearm = BoneMapOverride->leftForearm;
 		BoneMap.leftHand = BoneMapOverride->leftHand;
-		BoneMap.leftFingerTip = BoneMapOverride->leftFingerTip;
+		//BoneMap.leftFingerTip = BoneMapOverride->leftFingerTip;
 		BoneMap.rightShoulder = BoneMapOverride->rightShoulder;
 		BoneMap.rightArm = BoneMapOverride->rightArm;
 		BoneMap.rightForearm = BoneMapOverride->rightForearm;
 		BoneMap.rightHand = BoneMapOverride->rightHand;
-		BoneMap.rightFingerTip = BoneMapOverride->rightFingerTip;
+		//BoneMap.rightFingerTip = BoneMapOverride->rightFingerTip;
 		BoneMap.leftUpleg = BoneMapOverride->leftUpleg;
 		BoneMap.leftLeg = BoneMapOverride->leftLeg;
 		BoneMap.leftFoot = BoneMapOverride->leftFoot;
-		BoneMap.leftToe = BoneMapOverride->leftToe;
+		//BoneMap.leftToe = BoneMapOverride->leftToe;
 		BoneMap.rightUpleg = BoneMapOverride->rightUpleg;
 		BoneMap.rightLeg = BoneMapOverride->rightLeg;
 		BoneMap.rightFoot = BoneMapOverride->rightFoot;
-		BoneMap.rightToe = BoneMapOverride->rightToe;
+		//BoneMap.rightToe = BoneMapOverride->rightToe;
 	}
 
 	BoneMap.hip.Initialize(RequiredBones);
@@ -567,25 +567,25 @@ void FSmartsuitPoseNode::InitializeBoneReferences(const FBoneContainer& Required
 	BoneMap.chest.Initialize(RequiredBones);
 	BoneMap.neck.Initialize(RequiredBones);
 	BoneMap.head.Initialize(RequiredBones);
-	BoneMap.headTop.Initialize(RequiredBones);
+	//BoneMap.headTop.Initialize(RequiredBones);
 	BoneMap.leftShoulder.Initialize(RequiredBones);
 	BoneMap.leftArm.Initialize(RequiredBones);
 	BoneMap.leftForearm.Initialize(RequiredBones);
 	BoneMap.leftHand.Initialize(RequiredBones);
-	BoneMap.leftFingerTip.Initialize(RequiredBones);
+	//BoneMap.leftFingerTip.Initialize(RequiredBones);
 	BoneMap.rightShoulder.Initialize(RequiredBones);
 	BoneMap.rightArm.Initialize(RequiredBones);
 	BoneMap.rightForearm.Initialize(RequiredBones);
 	BoneMap.rightHand.Initialize(RequiredBones);
-	BoneMap.rightFingerTip.Initialize(RequiredBones);
+	//BoneMap.rightFingerTip.Initialize(RequiredBones);
 	BoneMap.leftUpleg.Initialize(RequiredBones);
 	BoneMap.leftLeg.Initialize(RequiredBones);
 	BoneMap.leftFoot.Initialize(RequiredBones);
-	BoneMap.leftToe.Initialize(RequiredBones);
+	//BoneMap.leftToe.Initialize(RequiredBones);
 	BoneMap.rightUpleg.Initialize(RequiredBones);
 	BoneMap.rightLeg.Initialize(RequiredBones);
 	BoneMap.rightFoot.Initialize(RequiredBones);
-	BoneMap.rightToe.Initialize(RequiredBones);
+	//BoneMap.rightToe.Initialize(RequiredBones);
 }
 
 USmartsuitBodyMapData::USmartsuitBodyMapData()
@@ -595,23 +595,23 @@ USmartsuitBodyMapData::USmartsuitBodyMapData()
 	chest = "chest";
 	neck = "neck";
 	head = "head";
-	headTop = "headTop";
+	//headTop = "headTop";
 	leftShoulder = "leftShoulder";
 	leftArm = "leftArm";
 	leftForearm = "leftForearm";
 	leftHand = "leftHand";
-	leftFingerTip = "leftFingerTip";
+	//leftFingerTip = "leftFingerTip";
 	rightShoulder = "rightShoulder";
 	rightArm = "rightArm";
 	rightForearm = "rightForearm";
 	rightHand = "rightHand";
-	rightFingerTip = "rightFingerTip";
+	//rightFingerTip = "rightFingerTip";
 	leftUpleg = "leftUpleg";
 	leftLeg = "leftLeg";
 	leftFoot = "leftFoot";
-	leftToe = "leftToe";
+	//leftToe = "leftToe";
 	rightUpleg = "rightUpleg";
 	rightLeg = "rightLeg";
 	rightFoot = "rightFoot";
-	rightToe = "rightToe";
+	//rightToe = "rightToe";
 }
